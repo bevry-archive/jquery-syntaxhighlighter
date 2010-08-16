@@ -232,10 +232,10 @@
 				
 				// Check
 				if ( !SyntaxHighlighter.loaded() ) {
-					if ( config.debug ) window.console.debug('SyntaxHighlighter.highlight: Chosen SyntaxHighlighter is not yet defined. Waiting 500ms then trying again.');
+					if ( config.debug ) window.console.debug('SyntaxHighlighter.highlight: Chosen SyntaxHighlighter is not yet defined. Waiting 1200 ms then trying again.');
 					setTimeout(function(){
 						SyntaxHighlighter.highlight.apply(SyntaxHighlighter, [params]);
-					},500);
+					},1200);
 					return;
 				}
 				
@@ -243,7 +243,11 @@
 				var	$codes = $el.findAndSelf('code,pre').filter('[class*=lang],.'+config.defaultCssClass).filter(':not(.prettyprint)');
 				
 				// Highlight
-				$codes.addClass('prettyprint '+config.defaultCssClass).each(function(){
+				$codes.css({
+					'overflow-y': 'visible',
+					'overflow-x': 'visible',
+					'white-space': 'pre'
+				}).addClass('prettyprint '+config.defaultCssClass).each(function(){
 					// Prepare
 					var	$code = $(this),
 						css = $code.attr('class'),
