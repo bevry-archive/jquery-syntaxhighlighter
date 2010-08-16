@@ -22,7 +22,7 @@ demo:
 	open ./demo/index.html
 
 add:
-	git add .gitignore CHECKLIST.* COPYING.* demo Makefile README.* scripts
+	git add .gitignore CHECKLIST.* COPYING.* demo Makefile README.* scripts styles
 
 push:
 	git push --all ; git push --tags ;
@@ -45,7 +45,9 @@ pack:
 
 compress:
 	java -jar $(CLOSUREFILE) --create_source_map ./scripts/closure.map --js_output_file=./scripts/jquery.syntaxhighlighter.min.js --js=./scripts/jquery.syntaxhighlighter.js;
-	#java -jar $(YUIFILE) ./styles/jquery.syntaxhighlighter.css -o ./styles/jquery.syntaxhighlighter.min.css
+	java -jar $(YUIFILE) ./styles/style.css -o ./styles/style.min.css
+	java -jar $(YUIFILE) ./styles/theme-balupton.css -o ./styles/theme-balupton.min.css
+	java -jar $(YUIFILE) ./styles/theme-google.css -o ./styles/theme-google.min.css
 
 build:
 	$(MAKE) pack;

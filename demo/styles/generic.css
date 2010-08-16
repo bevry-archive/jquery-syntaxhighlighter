@@ -17,17 +17,14 @@ h3 {
 	margin: 0.83em 0px;
 }
 
-body .syntaxhighlighter {
-	border: 5px solid #DDD !IMPORTANT;
-}
-code.code, pre {
+code.code, pre.code {
 	border: 5px solid #DDD;
 	padding: 7px 0 5px;
 	font-size: 14px;
+	white-space: pre;
 	overflow: auto;
 	max-height: 500px;
 	width: 100%;
-	white-space: pre;
 	display: block;
 }
 

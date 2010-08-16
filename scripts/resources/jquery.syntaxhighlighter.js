@@ -8,11 +8,25 @@
  * jQuery Aliaser
  */
 (function($){
-	
+
+	/**
+	 * Get all elements within ourself which match the selector, and include ourself in the search
+	 * @version 1.0.0
+	 * @date June 30, 2010
+     * @package jquery-sparkle {@link http://www.balupton/projects/jquery-sparkle}
+	 * @author Benjamin "balupton" Lupton {@link http://www.balupton.com}
+	 * @copyright (c) 2009-2010 Benjamin Arthur Lupton {@link http://www.balupton.com}
+	 * @license GNU Affero General Public License version 3 {@link http://www.gnu.org/licenses/agpl-3.0.html}
+	 */
+	$.fn.findAndSelf = $.fn.findAndSelf || function(selector){
+		var $this = $(this);
+		return $this.find(selector).andSelf().filter(selector);
+	};
+		
 	/**
 	 * jQuery SyntaxHighlighter
- 	 * @version 0.2.0-beta
- 	 * @date July 28, 2010
+ 	 * @version 0.2.1-beta
+ 	 * @date August 15, 2010
  	 * @since 0.1.0-dev, July 23, 2010
      * @package jquery-syntaxhighlighter {@link http://www.balupton/projects/jquery-syntaxhighlighter}
 	 * @author Benjamin "balupton" Lupton {@link http://www.balupton.com}
@@ -21,27 +35,114 @@
 	 */
 	if ( !($.SyntaxHighlighter||false) ) {
 		$.SyntaxHighlighter = {
-			// Options
-			options: {
-				load: true,
-				highlight: true,
-				debug: false,
-				defaults: {},
-				config: {
-					'wrapLines': true,
-					'baseUrl': 'https://bitbucket.org/balupton/syntaxhighlighter/raw/tip/build/output'
-				}
+			// Configuration
+			'config': {
+				/**
+				 * Whether or not we should load in Google Prettify automatically if it was not detected.
+				 */
+				'load': true,
+				
+				/**
+				 * Whether or not we should highlight all appropriate code blocks automatically once the page has finished loading.
+				 */
+				'highlight': true,
+				
+				/**
+				 * Whether or not we should output debug information in case something is not working correctly.
+				 */
+				'debug': false,
+				
+				/**
+				 * Whether or not we should wrap the code blocks lines, or have them scrollable.
+				 */
+				'wrapLines': true,
+				
+				/**
+				 * Whether or not we should display line numbers next to the code blocks.
+				 */
+				'lineNumbers': true,
+				
+				/**
+				 * Whether or not we should strip empty start and finish lines from the code blocks.
+				 */
+				'stripEmptyStartFinishLines': true,
+				
+				/**
+				 * Whether or not we should remove whitespaces/indentations which are only there for HTML formatting of our code block.
+				 */
+				'stripInitialWhitespace': true,
+				
+				/**
+				 * Whether or not we should alternate the lines background colours on odd and even rows.
+				 */
+				'alternateLines': false,
+				
+				/**
+				 * The default class to look for in case we have not explicitly specified a language.
+				 */
+				'defaultCssClass': 'highlight',
+				
+				/**
+				 * The theme that should be used by our highlighted code blocks.
+				 */
+				'theme': 'balupton',
+				
+				/**
+				 * The themes to load in for use with our highlighted code blocks.
+				 */
+				'themes': ['balupton'],
+				
+				/**
+				 * Whether or not we should add a Syntax Highlighter Sparkle extension if jQuery Sparkle is detected.
+				 */
+				'addSparkleExtension': true,
+				
+				/**
+				 * The baseUrl to load Google's Prettify from.
+				 * This is used to load in Google's Prettify if the load option is true and it was not found.
+				 */
+				'prettifyBaseUrl': 'http://google-code-prettify.googlecode.com/svn/trunk/src',
+				
+				/**
+				 * The baseUrl to load our Syntax Highlighter from.
+				 * This is used to load in the stylesheet and additional themes.
+				 */
+				'baseUrl': 'http://github.com/balupton/jquery-syntaxhighlighter/raw/master'
 			},
 			
 			// Init
-			init: function(params){
+			init: function(options){
 				// Prepare
-				$.extend(true, this.options, params||{});
+				var	SyntaxHighlighter = this,
+					config = SyntaxHighlighter.config;
+				
+				// Fix baseUrl
+				var	baseUrl = config.baseUrl;
+				if ( baseUrl[baseUrl.length-1] === '/' ) {
+					config.baseUrl = baseUrl.substr(0,baseUrl.length-2);
+				}
+				delete baseUrl;
+				
+				// Configure
+				$.extend(true, SyntaxHighlighter.config, options||{});
+				
+				// Sparkle
+				if ( $.Sparkle||false && config.addSparkleExtension ) {
+					// Add Syntax Highlighter to Sparkle
+					$.Sparkle.addExtension('syntaxhighlighter', function(){
+						$(this).syntaxHighlight();
+					});
+				}
+				
+				// Attach
+				$.fn.syntaxHighlight = $.fn.SyntaxHighlight = SyntaxHighlighter.fn;
+				 
 				// Load
-				if ( this.options.load ) this.load();
-				if ( !$.isEmptyObject(this.options.defaults) || !$.isEmptyObject(this.options.config) ) this.configure(this.options.defaults,this.options.config);
-				if ( this.options.highlight ) this.highlight();
-				if ( this.options.config.wrapLines ) this.wrapLines();
+				if ( config.load ) SyntaxHighlighter.load();
+				
+				// Highlight
+				if ( config.highlight ) SyntaxHighlighter.highlight();
+				
 				// Chain
 				return this;
 			},
@@ -49,41 +150,59 @@
 			// Load
 			load: function(){
 				// Prepare
-				var baseUrl = this.options.config.baseUrl;
+				var	SyntaxHighlighter = this,
+					config = SyntaxHighlighter.config,
+					prettifyBaseUrl = config.prettifyBaseUrl,
+					baseUrl = config.baseUrl,
+					themes = config.themes;
+				
 				// Append
-				$.appendScript(baseUrl+'/scripts/shCore.js');
-				$.appendStylesheet(baseUrl+'/styles/shCore.css');
-				$.appendStylesheet(baseUrl+'/styles/shThemeDefault.css');
-				// Autoload
-				this.autoload(baseUrl);
+				if ( !SyntaxHighlighter.loaded() ) {
+					$.appendScript(prettifyBaseUrl+'/prettify.js');
+					$.appendStylesheet(prettifyBaseUrl+'/prettify.css');
+					$.appendStylesheet(baseUrl+'/styles/style.min.css');
+					$.each(themes,function(i,theme){
+						$.appendStylesheet(baseUrl+'/styles/theme-'+theme+'.min.css');
+					});
+				}
+				
 				// Chain
 				return this;
 			},
 			
-			// Autoload
-			autoload: function(baseUrl){
-				// Check SyntaxHighlighter
-				if ( typeof SyntaxHighlighter === 'undefined' ) {
-					if ( $.SyntaxHighlighter.options.debug ) window.console.debug('$.SyntaxHighlighter.autoload: SyntaxHighlighter is not yet defined. Waiting 1000ms then trying again.');
-					setTimeout(function(){
-						$.SyntaxHighlighter.autoload.apply($.SyntaxHighlighter, [baseUrl]);
-					},1000);
-					return;
+			// Loaded
+			loaded: function(){
+				return typeof prettyPrint !== 'undefined';
+			},
+			
+			// Determine Language
+			determineLanguage: function(css){
+				// Prepare
+				var	language = null,
+					regex = /lang(uage)?-([a-z0-9]+)/g,
+					match = regex.exec(css);
+					
+				// Handle
+				while ( match !== null ) {
+					language = match[2];
+					match = regex.exec(css);
 				}
 				
-				// Include Autoloader
-				$.appendScript(baseUrl+'/scripts/shAutoloader.js'); // will only ever include once
+				// Return langauge
+				return language;
+			},
+			
+			// jQuery Function
+			fn: function(){
+				// Prepare
+				var	SyntaxHighlighter = $.SyntaxHighlighter,
+					config = SyntaxHighlighter.config,
+					$el = $(this);
 				
-				// Check Autoloader
-				if ( typeof SyntaxHighlighter.autoloadAllBrushes === 'undefined' ) {
-					if ( $.SyntaxHighlighter.options.debug ) window.console.debug('$.SyntaxHighlighter.autoload: Autoloader is not yet defined. Waiting 1000ms then trying again.');
-					setTimeout(function(){
-						$.SyntaxHighlighter.autoload.apply($.SyntaxHighlighter, [baseUrl]);
-					},1000);
-					return;
-				}
-				// Autoload
-	        	SyntaxHighlighter.autoloadAllBrushes(baseUrl);
+				// Highlight
+				$.SyntaxHighlighter.highlight({
+					'el': $el
+				});
 				
 				// Chain
 				return this;
@@ -91,92 +210,108 @@
 			
 			// Highlight
 			highlight: function(params){
-				// Check
-				if ( typeof SyntaxHighlighter === 'undefined' ) {
-					if ( $.SyntaxHighlighter.options.debug ) window.console.debug('$.SyntaxHighlighter.highlight: SyntaxHighlighter is not yet defined. Waiting 1200ms then trying again.');
-					setTimeout(function(){
-						$.SyntaxHighlighter.highlight.apply($.SyntaxHighlighter, [params]);
-					},1200);
-					return;
-				}
-				// Highlight
-				SyntaxHighlighter.all(params);
-				// Chain
-				return this;
-			},
-			
-			// Configure Syntax Highlighter
-			configure: function(defaults,config){
-				// Check
-				if ( typeof SyntaxHighlighter === 'undefined' ) {
-					if ( $.SyntaxHighlighter.options.debug ) window.console.debug('$.SyntaxHighlighter.configure: SyntaxHighlighter is not yet defined. Waiting 1100ms then trying again.');
-					setTimeout(function(){
-						$.SyntaxHighlighter.configure.apply($.SyntaxHighlighter,[defaults,config]);
-					},1100);
-					return;
-				}
-				// Fix baseUrl
-				var baseUrl = this.options.config.baseUrl;
-				if ( baseUrl[baseUrl.length-1] === '/' ) {
-					this.options.config.baseUrl = baseUrl.substr(0,baseUrl.length-2);
-				}
-				delete baseUrl;
-				// Configure
-				$.extend(SyntaxHighlighter.defaults, defaults||{});
-				$.extend(SyntaxHighlighter.config, config||{});
-				// Handle
-				if ( this.options.config['wrap-lines'] ) this.wrap();
-				// Chain
-				return this;
-			},
-			
-			// Wrap Lines
-			wrapLines: function(){
 				// Prepare
-				var $els =  $('.syntaxhighlighter');
+				if ( typeof params !== 'object' ) {
+					params = {};
+				}
+				var	SyntaxHighlighter = this,
+					config = SyntaxHighlighter.config,
+					$el = params.el||false;
+				
+				// Adjust
+				if ( !($el instanceof jQuery) ) {
+					$el = $('body');
+				}
+				
 				// Check
-				if ( $els.length === 0 ) {
-					if ( $.SyntaxHighlighter.options.debug ) window.console.debug('$.SyntaxHighlighter.wrapLines: There is not yet any syntax highlighted text. Waiting 1300ms then trying again.');
-					setTimeout($.SyntaxHighlighter.wrapLines,1300);
+				if ( !SyntaxHighlighter.loaded() ) {
+					if ( config.debug ) window.console.debug('SyntaxHighlighter.highlight: Chosen SyntaxHighlighter is not yet defined. Waiting 500ms then trying again.');
+					setTimeout(function(){
+						SyntaxHighlighter.highlight.apply(SyntaxHighlighter, [params]);
+					},500);
 					return;
 				}
-				// Check Styles
-				if ( $('#sh-wrap').length === 0 ) {
-					// Append Styles
-					$('body').append('<style type="text/css" id="sh-wrap">body .syntaxhighlighter .line {white-space: pre-wrap !important;}</style>');
-				}
-				// Cycle through
-				$els.filter(':not(.sh-wrapped)').each(function(){
-					// Fetch
-					var $sh = $(this).addClass('sh-wrapped'),
-						$gutter = $sh.find('td.gutter'),
-						$code = $sh.find('td.code')
-					;
-					// Cycle through lines
-					$gutter.children('.line').each(function(i){
-						// Fetch
-						var $gutterLine = $(this),
-							$codeLine = $code.find('.line:nth-child('+(i+1)+')')
-						;
-						// Fetch height
-						var height = $codeLine.height()||0;
-						if ( !height ) {
-							height = 'auto';
+				
+				// Fetch
+				var	$codes = $el.findAndSelf('code,pre').filter('[class*=lang],.'+config.defaultCssClass).filter(':not(.prettyprint)');
+				
+				// Highlight
+				$codes.addClass(config.defaultCssClass).each(function(){
+					// Prepare
+					var	$code = $(this),
+						css = $code.attr('class'),
+						language = SyntaxHighlighter.determineLanguage(css);
+					
+					// Language
+					$code.addClass('prettyprint lang-'+language);
+					
+					// stripEmptyStartFinishLines
+					if ( config.stripEmptyStartFinishLines ) {
+						var	html = $code.html();
+						html = html.replace(/^[\r\n]+|[\r\n\t\s]+$/g,'');
+						$code.html(html);
+						delete html;
+					}
+					
+					// Adjust insides
+					if ( config.stripInitialWhitespace ) {
+						var	html = $code.html(),
+						 	match = html.match(/^([\t\s]+)/)||[],
+							whitespace = (match[1]||'');
+						if ( whitespace.length ) {
+							html = html.replace(new RegExp('^'+whitespace,'gm'), '');
+							$code.html(html);
 						}
-						else {
-							height = height += 'px';
-						}
-						// Copy height over
-						$gutterLine.height(height+' !important');
-					});
+						delete html;
+						delete match;
+						delete whitespace;
+					}
+					
 				});
+				
+				// WrapLines
+				if ( config.lineNumbers ) {
+					$codes.addClass('linenums');
+				}
+				
+				// Theme
+				if ( config.theme ) {
+					$codes.addClass('theme-'+config.theme);
+				}
+				
+				// AlternateLines
+				if ( config.alternateLines ) {
+					$codes.addClass('alternate');
+				}
+				
+				// Fire
+				prettyPrint();
+				
+				// Adjust Lines
+				if ( config.wrapLines ) {
+					$codes.css({
+						'overflow-x':'hidden',
+						'overflow-y':'hidden',
+						'white-space':'pre-wrap',
+						'max-height':'none'
+					});
+				} else {
+					$codes.css({
+						'overflow-x':'auto',
+						'overflow-y':'auto',
+						'white-space':'normal',
+						'max-height':'500px'
+					});
+				}
+				
 				// Chain
 				return this;
 			}
+			
 		};
 	}
 	else {
-		window.console.warn("$.SyntaxHighlighter has already been defined...");
+		window.console.warn("SyntaxHighlighter has already been defined...");
 	}
 
 })(jQuery);
