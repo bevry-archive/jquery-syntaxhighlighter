@@ -47,6 +47,7 @@ Changelog:
 v1.0.1-beta, August 16, 2010
 - Now uses a local copy of prettify which contains a fix to only prettify something once.
 - Fixed some issues with IE and newlines
+- Set tab width to 4 instead of 8
 
 v1.0.0-beta, August 16, 2010
 - Now uses Google's Prettify instead of Alex's Syntax Highlighter v3. There were just too many issues with Alex's and I couldn't fix them all. This fixes the IE error for all users.
