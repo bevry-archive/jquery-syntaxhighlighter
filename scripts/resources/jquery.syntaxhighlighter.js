@@ -25,8 +25,8 @@
 		
 	/**
 	 * jQuery SyntaxHighlighter
- 	 * @version 0.2.1-beta
- 	 * @date August 15, 2010
+ 	 * @version 1.0.1-beta
+ 	 * @date August 16, 2010
  	 * @since 0.1.0-dev, July 23, 2010
      * @package jquery-syntaxhighlighter {@link http://www.balupton/projects/jquery-syntaxhighlighter}
 	 * @author Benjamin "balupton" Lupton {@link http://www.balupton.com}

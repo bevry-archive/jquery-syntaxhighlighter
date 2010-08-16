@@ -35,10 +35,10 @@ Installation & Usage:
 1. Refer to the (demo/index.html) or http://www.balupton.com/projects/jquery-syntaxhighligher if the demo is not included.
 
 Todo:
-1. Could use Sparkle BalClass but no necessary yet.
+1. Fix known issues.
 
 Known Issues:
-1. IE newlines are still busted in certain circumstances.
+1. IE newlines are still busted in certain circumstances for code elements. In the meantime use pre instead.
 
 ----
 
