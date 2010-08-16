@@ -101,13 +101,13 @@
 				 * The baseUrl to load Google's Prettify from.
 				 * This is used to load in Google's Prettify if the load option is true and it was not found.
 				 */
-				'prettifyBaseUrl': 'http://google-code-prettify.googlecode.com/svn/trunk/src',
+				'prettifyBaseUrl': false ? 'http://localhost/repos/jquery-syntaxhighlighter/prettify' : 'http://github.com/balupton/jquery-syntaxhighlighter/raw/master/prettify',
 				
 				/**
 				 * The baseUrl to load our Syntax Highlighter from.
 				 * This is used to load in the stylesheet and additional themes.
 				 */
-				'baseUrl': 'http://github.com/balupton/jquery-syntaxhighlighter/raw/master'
+				'baseUrl': false ? 'http://localhost/repos/jquery-syntaxhighlighter' : 'http://github.com/balupton/jquery-syntaxhighlighter/raw/master'
 			},
 			
 			// Init
@@ -158,21 +158,25 @@
 				
 				// Append
 				if ( !SyntaxHighlighter.loaded() ) {
-					$.appendScript(prettifyBaseUrl+'/prettify.js');
-					$.appendStylesheet(prettifyBaseUrl+'/prettify.css');
+					$.appendScript(prettifyBaseUrl+'/prettify.min.js');
+					$.appendStylesheet(prettifyBaseUrl+'/prettify.min.css');
 					$.appendStylesheet(baseUrl+'/styles/style.min.css');
 					$.each(themes,function(i,theme){
 						$.appendStylesheet(baseUrl+'/styles/theme-'+theme+'.min.css');
 					});
+					SyntaxHighlighter.loadedExtras = true;
 				}
 				
 				// Chain
 				return this;
 			},
 			
+			// Loaded Extras
+			loadedExtras: false,
+			
 			// Loaded
 			loaded: function(){
-				return typeof prettyPrint !== 'undefined';
+				return typeof prettyPrint !== 'undefined' && this.loadedExtras;
 			},
 			
 			// Determine Language
@@ -236,37 +240,14 @@
 				var	$codes = $el.findAndSelf('code,pre').filter('[class*=lang],.'+config.defaultCssClass).filter(':not(.prettyprint)');
 				
 				// Highlight
-				$codes.addClass(config.defaultCssClass).each(function(){
+				$codes.addClass('prettyprint '+config.defaultCssClass).each(function(){
 					// Prepare
 					var	$code = $(this),
 						css = $code.attr('class'),
 						language = SyntaxHighlighter.determineLanguage(css);
 					
 					// Language
-					$code.addClass('prettyprint lang-'+language);
-					
-					// stripEmptyStartFinishLines
-					if ( config.stripEmptyStartFinishLines ) {
-						var	html = $code.html();
-						html = html.replace(/^[\r\n]+|[\r\n\t\s]+$/g,'');
-						$code.html(html);
-						delete html;
-					}
-					
-					// Adjust insides
-					if ( config.stripInitialWhitespace ) {
-						var	html = $code.html(),
-						 	match = html.match(/^([\t\s]+)/)||[],
-							whitespace = (match[1]||'');
-						if ( whitespace.length ) {
-							html = html.replace(new RegExp('^'+whitespace,'gm'), '');
-							$code.html(html);
-						}
-						delete html;
-						delete match;
-						delete whitespace;
-					}
-					
+					$code.addClass('lang-'+language);
 				});
 				
 				// WrapLines
@@ -287,6 +268,54 @@
 				// Fire
 				prettyPrint();
 				
+				// Adjust HTML: stripEmptyStartFinishLines
+				// we have to do this here, as before prettyPrint IE has issues with newlines
+				if ( config.stripEmptyStartFinishLines ) {
+					$codes.find('li:first-child > :first-child, li:last-child > :first-child').each(function(){
+						// Prepare
+						var	$initialText = $(this),
+							html = $initialText.html(),
+							empty = /^([\r\n\s\t]|\&nbsp;)*$/.test(html),
+							$parent = $initialText.parent(),
+							$siblings = $initialText.siblings();
+						
+						// Check
+						if ( empty && ($siblings.length === 0 || ($siblings.length === 1 && $siblings.filter(':last').is('br'))) ) {
+							// Remove Line
+							var	$parent = $initialText.parent(),
+								value = $parent.val();
+							$parent.next().val(value);
+							$parent.remove();
+						}
+					});
+				}
+				
+				// Adjust HTML: stripInitialWhitespace
+				// we have to do this here, as before prettyPrint IE has issues with newlines
+				if ( config.stripInitialWhitespace ) {
+					$codes.find('li:first-child > :first-child').each(function(){
+						// Prepare
+						var	$initialText = $(this),
+							html = $initialText.html(),
+							match = html.match(/^(([\r\n\s\t]|\&nbsp;)+)/)||[],
+							whitespace = (match[1]||'');
+						
+						// Check
+						if ( whitespace.length ) {
+							// Replace
+							$initialText.parent().siblings().children(':first-child').add($initialText).each(function(){
+								// Prepare
+								var	$nextText = $(this),
+									html = $nextText.html();
+								// Replace
+								html = html.replace(new RegExp('^'+whitespace,'gm'), '');
+								// Apply
+								$nextText.html(html);
+							});
+						}
+					});
+				}
+					
 				// Adjust Lines
 				if ( config.wrapLines ) {
 					$codes.css({

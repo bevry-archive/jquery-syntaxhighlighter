@@ -19,7 +19,7 @@
  * - A copy of our interpretation of the license used.
  *   If not, see <http://github.com/balupton/jquery-syntaxhighligher/blob/master/COPYING.txt>.
  * 
- * @version 1.0.0-beta
+ * @version 1.0.1-beta
  * @date August 16, 2010
  * @since 0.1.0-dev, July 23, 2010
  * @category jquery-plugin
@@ -43,6 +43,10 @@ Known Issues:
 ----
 
 Changelog:
+
+v1.0.1-beta, August 16, 2010
+- Now uses a local copy of prettify which contains a fix to only prettify something once.
+- Fixed some issues with IE and newlines
 
 v1.0.0-beta, August 16, 2010
 - Now uses Google's Prettify instead of Alex's Syntax Highlighter v3. There were just too many issues with Alex's and I couldn't fix them all. This fixes the IE error for all users.

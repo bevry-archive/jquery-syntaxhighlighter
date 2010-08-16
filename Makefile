@@ -22,7 +22,7 @@ demo:
 	open ./demo/index.html
 
 add:
-	git add .gitignore CHECKLIST.* COPYING.* demo Makefile README.* scripts styles
+	git add .gitignore CHECKLIST.* COPYING.* demo Makefile README.* prettify scripts styles
 
 push:
 	git push --all ; git push --tags ;
@@ -34,8 +34,7 @@ edithooks:
 refresh:
 	wget -q http://github.com/balupton/jquery-sparkle/raw/master/scripts/resources/core.console.js -O scripts/resources/core.console.js ;
 	wget -q http://github.com/balupton/jquery-sparkle/raw/master/scripts/resources/jquery.appendscriptstyle.js -O scripts/resources/jquery.appendscriptstyle.js ;
-
-
+	
 pack:
 	cat \
 		./scripts/resources/core.console.js \
@@ -49,6 +48,9 @@ compress:
 	java -jar $(YUIFILE) ./styles/theme-balupton.css -o ./styles/theme-balupton.min.css
 	java -jar $(YUIFILE) ./styles/theme-google.css -o ./styles/theme-google.min.css
 
+	java -jar $(CLOSUREFILE) --create_source_map ./prettify/closure.map --js_output_file=./prettify/prettify.min.js --js=./prettify/prettify.js;
+	java -jar $(YUIFILE) ./prettify/prettify.css -o ./prettify/prettify.min.css
+	
 build:
 	$(MAKE) pack;
 	$(MAKE) compress;
