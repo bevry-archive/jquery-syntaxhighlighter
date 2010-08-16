@@ -858,6 +858,7 @@ window['_pr_isIE6'] = function () {
       var tokens = sourceCode.match(tokenizer) || [];
       var styleCache = {};
 
+      // loop through
       for (var ti = 0, nTokens = tokens.length; ti < nTokens; ++ti) {
         var token = tokens[ti];
         var style = styleCache[token];

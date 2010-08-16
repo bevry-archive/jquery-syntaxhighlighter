@@ -274,13 +274,13 @@ if ( typeof window.console !== 'object' || typeof window.console.emulated === 'u
 				 * The baseUrl to load Google's Prettify from.
 				 * This is used to load in Google's Prettify if the load option is true and it was not found.
 				 */
-				'prettifyBaseUrl': false ? 'http://localhost/repos/jquery-syntaxhighlighter/prettify' : 'http://github.com/balupton/jquery-syntaxhighlighter/raw/master/prettify',
+				'prettifyBaseUrl': false ? 'http://192.168.1.2/repos/jquery-syntaxhighlighter/prettify' : 'http://github.com/balupton/jquery-syntaxhighlighter/raw/master/prettify',
 				
 				/**
 				 * The baseUrl to load our Syntax Highlighter from.
 				 * This is used to load in the stylesheet and additional themes.
 				 */
-				'baseUrl': false ? 'http://localhost/repos/jquery-syntaxhighlighter' : 'http://github.com/balupton/jquery-syntaxhighlighter/raw/master'
+				'baseUrl': false ? 'http://192.168.1.2/repos/jquery-syntaxhighlighter' : 'http://github.com/balupton/jquery-syntaxhighlighter/raw/master'
 			},
 			
 			// Init
@@ -337,6 +337,9 @@ if ( typeof window.console !== 'object' || typeof window.console.emulated === 'u
 					$.each(themes,function(i,theme){
 						$.appendStylesheet(baseUrl+'/styles/theme-'+theme+'.min.css');
 					});
+					if ( $.browser.msie ) {
+						$.appendStylesheet(baseUrl+'/styles/ie.min.css');
+					}
 					SyntaxHighlighter.loadedExtras = true;
 				}
 				

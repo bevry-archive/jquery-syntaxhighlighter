@@ -47,6 +47,7 @@ compress:
 	java -jar $(YUIFILE) ./styles/style.css -o ./styles/style.min.css
 	java -jar $(YUIFILE) ./styles/theme-balupton.css -o ./styles/theme-balupton.min.css
 	java -jar $(YUIFILE) ./styles/theme-google.css -o ./styles/theme-google.min.css
+	java -jar $(YUIFILE) ./styles/ie.css -o ./styles/ie.min.css
 
 	java -jar $(CLOSUREFILE) --create_source_map ./prettify/closure.map --js_output_file=./prettify/prettify.min.js --js=./prettify/prettify.js;
 	java -jar $(YUIFILE) ./prettify/prettify.css -o ./prettify/prettify.min.css
