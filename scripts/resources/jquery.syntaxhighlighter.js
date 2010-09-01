@@ -80,7 +80,7 @@
 				/**
 				 * The default class to look for in case we have not explicitly specified a language.
 				 */
-				'defaultCssClass': 'highlight',
+				'defaultClassname': 'highlight',
 				
 				/**
 				 * The theme that should be used by our highlighted code blocks.
@@ -239,15 +239,33 @@
 					return;
 				}
 				
+				// Prepare Classnames
+				var defaultClassname = config.defaultClassname,
+					defaultSelector = '';
+				if ( typeof defaultClassname === 'array' ) {
+					defaultSelector = '.'+defaultClassname.join(',.');
+					defaultClassname = defaultClassname.join(' ');
+				}
+				else {
+					defaultClassname = String(defaultClassname);
+					defaultSelector = '.'+defaultClassname.replace(' ',',.');
+				}
+				
+				// Check Classnames
+				if ( defaultSelector === '.' || !defaultClassname ) {
+					window.console.error('SyntaxHighlighter.highlight: Invalid defaultClassname.', [this,arguments], [config.defaultClassname]);
+					window.console.trace();
+				}
+				
 				// Fetch
-				var	$codes = $el.findAndSelf('code,pre').filter('[class*=lang],.'+config.defaultCssClass).filter(':not(.prettyprint)');
+				var	$codes = $el.findAndSelf('code,pre').filter('[class*=lang],'+defaultSelector).filter(':not(.prettyprint)');
 				
 				// Highlight
 				$codes.css({
 					'overflow-y': 'visible',
 					'overflow-x': 'visible',
 					'white-space': 'pre'
-				}).addClass('prettyprint '+config.defaultCssClass).each(function(){
+				}).addClass('prettyprint '+defaultClassname).each(function(){
 					// Prepare
 					var	$code = $(this),
 						css = $code.attr('class'),
@@ -276,7 +294,7 @@
 				prettyPrint();
 				
 				// ReFind: This prevents a firefox bug under special circumstances
-				$codes = $el.findAndSelf('code,pre').filter('.'+config.defaultCssClass);
+				$codes = $el.findAndSelf('code,pre').filter(defaultSelector);
 				
 				// Adjust HTML: stripEmptyStartFinishLines
 				// we have to do this here, as before prettyPrint IE has issues with newlines
