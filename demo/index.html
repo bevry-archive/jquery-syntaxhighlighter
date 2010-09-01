@@ -8,7 +8,7 @@
     </title>
 	
 	<!-- Include jQuery (Ajaxy Requirement) -->
-	<script type="text/javascript" src="../scripts/jquery-1.4.2.js"></script>
+	<script type="text/javascript" src="../scripts/jquery-1.4.2.min.js"></script>
 	<!-- Include jQuery Syntax Highlighter (Production) -->
 	<!-- <script type="text/javascript" src="../scripts/jquery.syntaxhighlighter.min.js"></script> -->
 	<!-- Include jQuery Syntax Highlighter (Development) -->
@@ -110,7 +110,7 @@
 		<p>And we want to highlight it. We can do this two ways. One is letting the Syntax Highlighter auto-detect which language you are using, the other is a more SEO friendly approach where we explicitly specify which language we want to use.</p>
 		
 		<h3>Auto-detection of the language</h3>
-		<p>To highlight our code and auto-detect the language, we would simply add the classname <code>highlight</code> to our <code>code</code> block. This will look like so:</p>
+		<p>To highlight our code and auto-detect the language, we would simply add the classname <code>highlight</code> to our code block. This will look like so:</p>
 		<pre class="code language-html">
 			The following code block is what I would like to syntax highlight:
 			&lt;pre class="highlight"&gt;
@@ -129,7 +129,7 @@
 		</pre>
 		
 		<h3>Explicit specification of the language</h3>
-		<p>We can also highlight our code by specifying the language used explicitly. This is good in case we don't trust the auto-detection script or if we would like some <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/text-level-semantics.html#the-code-element" class="extern">SEO benefits</a> by being more semantic (explicit with our markup). To do this we would simply add the classname <code>language-javascript</code> to our <code>code</code> block, where the text <code>javascript</code> is the name of the language we are using. This will look like so:</p>
+		<p>We can also highlight our code by specifying the language used explicitly. This is good in case we don't trust the auto-detection script or if we would like some <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/text-level-semantics.html#the-code-element" class="extern">SEO benefits</a> by being more semantic (explicit with our markup). To do this we would simply add the classname <code>language-javascript</code> to our code block, where the text <code>javascript</code> is the name of the language we are using. This will look like so:</p>
 		<pre class="code language-html">
 			The following code block is what I would like to syntax highlight:
 			&lt;pre class="language-javascript"&gt;
@@ -152,7 +152,7 @@
 		<h3 id="encoding">Encoding HTML</h3>
 		<p>
 			An extremely important thing with using code blocks is making sure you are encoding your HTML properly within your code blocks.
-			This is because if you don't your web browser will think it has to run that code, despite it being in a <code>code</code> element! Argh! That could really cause problems...
+			This is because if you don't your web browser will think it has to run that code, despite it being in a <code>code</code> or <code>pre</code> element! Argh! That could really cause problems...
 			So what we want to do is whenever we want to include code blocks (regardless of whether or not we are wanting to syntax highlight them) we always must remember to encode the HTML entities appropriately!
 			So we do this by converting all the characters which are <code>&lt;</code> to <code>&amp;lt;</code> and all the <code>&gt;</code> to <code>&amp;gt;</code>.
 			So for instance let's look at the following code sample:

@@ -19,7 +19,7 @@
  * - A copy of our interpretation of the license used.
  *   If not, see <http://github.com/balupton/jquery-syntaxhighligher/blob/master/COPYING.txt>.
  * 
- * @version 1.1.0-dev
+ * @version 1.1.0-beta
  * @date September 01, 2010
  * @since 0.1.0-dev, July 23, 2010
  * @category jquery-plugin
@@ -44,10 +44,10 @@ Known Issues:
 
 Changelog:
 
-v1.1.0-dev, September 01, 2010
+v1.1.0-beta, September 01, 2010
 - Changed defaultCssClass option to defaultClassname.
-- Fixed weird issue with firefox not applying the properties to the rendered code.
-- A bit more explicit with the css, this will help safari and opera render properly if stylesheets are still loading
+- Fixed issue with firefox sometimes not applying the properties to the rendered code, causing text overflow.
+- We are now a bit more explicit with the css, this will help safari and opera render properly if stylesheets are still loading
 - Increased the load delay so that highlight will run when themes should have loaded.
 - Updated demo to use PRE elements instead.
 

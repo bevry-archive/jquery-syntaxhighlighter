@@ -254,7 +254,23 @@ if ( typeof window.console.emulated === 'undefined' ) {
 		var $this = $(this);
 		return $this.find(selector).andSelf().filter(selector);
 	};
-		
+	
+	/**
+	 * Add the String replace method to the Number prototype
+	 * This is to fix an error with jQuery v1.4.2 when $('#el').val() contains a numeric value on Firefox.
+	 * Error is here: http://getsatisfaction.com/balupton/topics/word_jumbles
+	 * @version 1.0.0
+	 * @date September 01, 2010
+     * @package jquery-sparkle {@link http://www.balupton/projects/jquery-sparkle}
+	 * @author Benjamin "balupton" Lupton {@link http://www.balupton.com}
+	 * @copyright (c) 2009-2010 Benjamin Arthur Lupton {@link http://www.balupton.com}
+	 * @license GNU Affero General Public License version 3 {@link http://www.gnu.org/licenses/agpl-3.0.html}
+	 */
+	Number.prototype.replace = Number.prototype.replace || function(){
+		var str = String(this);
+		return str.replace.apply(this,arguments);
+	}
+	
 	/**
 	 * jQuery SyntaxHighlighter
  	 * @version 1.0.1-beta
@@ -524,9 +540,6 @@ if ( typeof window.console.emulated === 'undefined' ) {
 				
 				// Fire
 				prettyPrint();
-				
-				// ReFind: This prevents a firefox bug under special circumstances
-				$codes = $el.findAndSelf('code,pre').filter(defaultSelector);
 				
 				// Adjust HTML: stripEmptyStartFinishLines
 				// we have to do this here, as before prettyPrint IE has issues with newlines
