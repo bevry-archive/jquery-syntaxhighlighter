@@ -19,8 +19,8 @@
  * - A copy of our interpretation of the license used.
  *   If not, see <http://github.com/balupton/jquery-syntaxhighligher/blob/master/COPYING.txt>.
  * 
- * @version 1.0.1-beta
- * @date August 16, 2010
+ * @version 1.1.0-dev
+ * @date September 01, 2010
  * @since 0.1.0-dev, July 23, 2010
  * @category jquery-plugin
  * @package jquery-syntaxhighligher {@link http://www.balupton/projects/jquery-syntaxhighligher}
@@ -38,11 +38,18 @@ Todo:
 1. Fix known issues.
 
 Known Issues:
-1. IE newlines are still busted in certain circumstances for code elements. In the meantime use pre instead.
+1. IE newlines are still busted in certain circumstances for CODE elements. In the meantime use PRE instead.
 
 ----
 
 Changelog:
+
+v1.1.0-dev, September 01, 2010
+- Changed defaultCssClass option to defaultClassname.
+- Fixed weird issue with firefox not applying the properties to the rendered code.
+- A bit more explicit with the css, this will help safari and opera render properly if stylesheets are still loading
+- Increased the load delay so that highlight will run when themes should have loaded.
+- Updated demo to use PRE elements instead.
 
 v1.0.1-beta, August 16, 2010
 - Now uses a local copy of prettify which contains a fix to only prettify something once.

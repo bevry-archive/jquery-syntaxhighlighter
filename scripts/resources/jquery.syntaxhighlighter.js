@@ -275,6 +275,9 @@
 				// Fire
 				prettyPrint();
 				
+				// ReFind: This prevents a firefox bug under special circumstances
+				$codes = $el.findAndSelf('code,pre').filter('.'+config.defaultCssClass);
+				
 				// Adjust HTML: stripEmptyStartFinishLines
 				// we have to do this here, as before prettyPrint IE has issues with newlines
 				if ( config.stripEmptyStartFinishLines ) {

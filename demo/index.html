@@ -49,7 +49,9 @@
 			<li><a href="#install" title="See the quick and easy installation instructions">Installation and usage</a> can be done in two lines!</li>
 			<li>Code can either be wrapped (default) or scrollable.</li>
 			<li>Styling is themeable. Comes with two custom themes (balupton and google).</li>
-			<li><a href="#using" title="See more information on using the Syntax Highlighter">Support for using the <code>code</code> element for SEO and semantic relevance!</a> We also support <code>pre</code> elements.</li>
+			<li><a href="#using" title="See more information on using the Syntax Highlighter">Support for using the <code>code</code> and <code>pre</code> elements for SEO and semantic relevance!</a>
+				<em>Note! Currently Internet Explorer 6-8 have an <a href="http://stackoverflow.com/questions/1970446/prettify-highlightning-in-a-pre-with-white-spacenowrap-is-one-line-in-ie">issue</a> with rendering new lines on code elements, until a fix is found please use <code>pre</code> elements instead.</em>
+			</li>
 			<li id="supported"><a href="#using" title="See more information on using the Syntax Highlighter">Supports the following languages</a> out of the box: <em>bsh, c, cc, cpp, cs, csh, cyc, cv, htm, html, java, js, m, mxml, perl, pl, pm, py, rb, sh, xhtml, xml, xsl.</em></li>
 			<li><a href="#using" title="See more information on using the Syntax Highlighter">Lightweight auto-detection for which language you are using.</a> We can also manually sepecify the language for SEO and semantic relevance according to the <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/text-level-semantics.html#the-code-element" class="extern">WhatWG's recommendation</a> on code inclusion.</li>
 			<li><a href="#ajax" title="See more information about using the Syntax Highlighter with dynamic content">Ajax and Dynamic Content Safe.</a> Can be used on the fly with dynamic content safely.</li>
@@ -64,33 +66,33 @@
 		
 		<h3>Step 1. Include jQuery (insert into your page's head tag)</h3>
 		<p>If your page already has jQuery included then you can skip this step.</p>
-		<code class="code language-html">
+		<pre class="code language-html">
 			&lt;!-- Include jQuery (Syntax Highlighter Requirement) --&gt;
 			&lt;script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"&gt;&lt;/script&gt;
-		</code>
+		</pre>
 		
 		<h3>Step 2. Include jQuery Syntax Highlighter (insert into your page's head tag)</h3>
-		<code class="code language-html">
+		<pre class="code language-html">
 			&lt;!-- Include jQuery Syntax Highlighter --&gt;
 			&lt;script type="text/javascript" src="http://github.com/balupton/jquery-syntaxhighlighter/raw/master/scripts/jquery.syntaxhighlighter.min.js"&gt;&lt;/script&gt;
-		</code>
+		</pre>
 		
 		<h3>Step 3. Initialise jQuery Syntax Highlighter (insert into your page's head tag)</h3>
-		<code class="code language-html">
+		<pre class="code language-html">
 			&lt;!-- Initialise jQuery Syntax Highlighter --&gt;
 			&lt;script type="text/javascript"&gt;$.SyntaxHighlighter.init();&lt;/script&gt;
-		</code>
+		</pre>
 		
-		<p>And that's all there is to it in regards to installation. You don't actually have to download anything! now that is neat. Alternatively you could use a local copy of jQuery Syntax Highlighter instead of the CDN copy, but we'll leave that to you. So moving on, how do we let Syntax Highlighter that we want to highlight our code block?</p>
+		<p>And that's all there is to it in regards to installation. You don't actually have to download anything! now that is neat. Alternatively you could use a local copy of jQuery Syntax Highlighter instead of the CDN copy, but we'll leave that to you. So moving on, how do we let Syntax Highlighter know that we want to highlight our code block?</p>
 	</div>
 	
 	<div class="section using" id="using">
 		<h2>Usage</h2>
 		
 		<p>So you have you standard code block of let's say javascript code, which looks like this:</p>
-		<code class="code language-html">
+		<pre class="code language-html">
 			The following code block is what I would like to syntax highlight:
-			&lt;code&gt;
+			&lt;pre&gt;
 				// Define our Function
 				function checkMeaningOfLife ( decimal, success ) {
 					if ( parseInt(decimal,10) === 42 ) {
@@ -102,16 +104,16 @@
 					decimal = 42.00;
 				// Fire our Function
 				checkMeaningOfLife(decimal,success);
-			&lt;/code&gt;
-		</code>
+			&lt;/pre&gt;
+		</pre>
 		
 		<p>And we want to highlight it. We can do this two ways. One is letting the Syntax Highlighter auto-detect which language you are using, the other is a more SEO friendly approach where we explicitly specify which language we want to use.</p>
 		
 		<h3>Auto-detection of the language</h3>
 		<p>To highlight our code and auto-detect the language, we would simply add the classname <code>highlight</code> to our <code>code</code> block. This will look like so:</p>
-		<code class="code language-html">
+		<pre class="code language-html">
 			The following code block is what I would like to syntax highlight:
-			&lt;code class="highlight"&gt;
+			&lt;pre class="highlight"&gt;
 				// Define our Function
 				function checkMeaningOfLife ( decimal, success ) {
 					if ( parseInt(decimal,10) === 42 ) {
@@ -123,14 +125,14 @@
 					decimal = 42.00;
 				// Fire our Function
 				checkMeaningOfLife(decimal,success);
-			&lt;/code&gt;
-		</code>
+			&lt;/pre&gt;
+		</pre>
 		
 		<h3>Explicit specification of the language</h3>
 		<p>We can also highlight our code by specifying the language used explicitly. This is good in case we don't trust the auto-detection script or if we would like some <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/text-level-semantics.html#the-code-element" class="extern">SEO benefits</a> by being more semantic (explicit with our markup). To do this we would simply add the classname <code>language-javascript</code> to our <code>code</code> block, where the text <code>javascript</code> is the name of the language we are using. This will look like so:</p>
-		<code class="code language-html">
+		<pre class="code language-html">
 			The following code block is what I would like to syntax highlight:
-			&lt;code class="language-javascript"&gt;
+			&lt;pre class="language-javascript"&gt;
 				// Define our Function
 				function checkMeaningOfLife ( decimal, success ) {
 					if ( parseInt(decimal,10) === 42 ) {
@@ -142,8 +144,8 @@
 					decimal = 42.00;
 				// Fire our Function
 				checkMeaningOfLife(decimal,success);
-			&lt;/code&gt;
-		</code>
+			&lt;/pre&gt;
+		</pre>
 		
 		<p>Sweet! That was too easy!. But there is one every important thing we have to take note of before we continue. And that is encoding our HTML within code blocks such that it is not actually interpreted by the browser as html! Eeee. So let's read about that.</p>
 		
@@ -155,23 +157,40 @@
 			So we do this by converting all the characters which are <code>&lt;</code> to <code>&amp;lt;</code> and all the <code>&gt;</code> to <code>&amp;gt;</code>.
 			So for instance let's look at the following code sample:
 		</p>
-		<code class="code language-html">
-			&lt;code class="language-html"&gt;
+		<pre class="code language-html">
+			&lt;pre class="language-html"&gt;
 				&lt;span&gt;
 					I'm a span element. I hope I've been escaped properly... as otherwise I will be :-( and the browser will be :-O
 				&lt;/span&gt;
-			&lt;/code&gt;
-		</code>
+			&lt;/pre&gt;
+		</pre>
 		<p>Looks good, but this is how we actually code it in our HTML:</p>
-		<code class="code language-html">
-			&lt;code class="language-html"&gt;
+		<pre class="code language-html">
+			&lt;pre class="language-html"&gt;
 				&amp;lt;span&amp;gt;
 					I'm a span element. I hope I've been escaped properly... as otherwise I will be :-( and the browser will be :-O
 				&amp;lt;/span&amp;gt;
-			&lt;/code&gt;
-		</code>
+			&lt;/pre&gt;
+		</pre>
 		<p>Hrmmm. Interesting... But once you've got that nailed, then there really are not worries and you're all good to go.
 			If you are a keen person, you may want also want check out the source code for this demo to gain a better grasp of this issue.</p>
+		
+		<p>
+			There is also one quite important thing. Internet Explorer 6-8 will struggle displaying newlines using <code>code</code> elements. This is a known issue and has been documented in various locations with no known fix
+			<sup>
+				<a href="http://stackoverflow.com/questions/1970446/prettify-highlightning-in-a-pre-with-white-spacenowrap-is-one-line-in-ie">1</a>
+				<a href="http://code.google.com/p/google-code-prettify/issues/detail?id=127">2</a>
+				<a href="http://www.quirksmode.org/bugreports/archives/2004/11/innerhtml_and_t.html">3</a>
+			</sup>
+			. In the meantime please use <code>pre</code> elements instead of <code>code</code> elements. You can achieve the same SEO semantic benefits by adding the classname <code>code</code> to your <code>pre</code> element like so:
+		</p>
+		<pre class="code language-html">
+			&lt;pre class="code language-html"&gt;
+				&amp;lt;span&amp;gt;
+					I'm a span element. I hope I've been escaped properly... as otherwise I will be :-( and the browser will be :-O
+				&amp;lt;/span&amp;gt;
+			&lt;/pre&gt;
+		</pre>
 		
 		<p>Great! So that is all there is too it and all you need to know to install and use the Syntax Highlighter. You can quit reading and start working on your project right now, or you could learn a little bit more.</p>
 	</div>
@@ -179,10 +198,10 @@
 	<div class="section advanced" id="advanced">
 		<h3 id="ajax">Highlighting Dynamic/Ajax Content</h3>
 		<p>Syntax Highlighter is also ajax friendly. This means we can load in dynamic code blocks into our page which we would like highlighted, and actually highlight them without problem. Let's see how we can do this with the following snippet of javascript code:</p>
-		<code class="code language-javascript">
+		<pre class="code language-javascript">
 			var $content = $('&lt;div&gt;This is an upcoming code black:&lt;code class="language-javascript"&gt;// I am some code&lt;/code&gt;&lt;/div&gt;');
 			$content.syntaxHighlight(); // will highlight the code block found inside
-		</code>
+		</pre>
 		
 		<p>If you are using <a href="http://www.balupton.com/projects/jquery-sparkle" title="Visit jQuery Sparkle's Homepage" class="extern">jQuery Sparkle</a> (a Do-Not-Repeat-Yourself jQuery Framework aimed at simplifying your development with powerful tools) then calling <code>$content.sparkle()</code> will also call <code>$content.syntaxHighlight()</code> automatically for us.</p>
 	</div>
@@ -190,7 +209,7 @@
 	<div class="section options" id="options">
 		<h2>Configurable Options</h2>
 		<p>jQuery Syntax Highlighter comes with a whole bunch of configurable options. Here they are:</p>
-		<code class="code language-javascript">
+		<pre class="code language-javascript">
 			/**
 			 * Whether or not we should load in Google Prettify automatically if it was not detected.
 			 */
@@ -257,17 +276,17 @@
 			 * This is used to load in the stylesheet and additional themes.
 			 */
 			'baseUrl': 'http://github.com/balupton/jquery-syntaxhighlighter/raw/master'
-		</code>
+		</pre>
 		
 		<p>To use one, all we need to do is add it to our <code>init</code> call way back in our <code>head</code> tag when we initialise the jQuery Syntax Highlighter. So let's see how we would do this to disable line wrapping:</p>
-		<code class="code language-html">
+		<pre class="code language-html">
 			&lt;!-- Initialise jQuery Syntax Highlighter --&gt;
 			&lt;script type="text/javascript"&gt;
 				$.SyntaxHighlighter.init({
 					'wrapLines':false
 				});
 			&lt;/script&gt;
-		</code>
+		</pre>
 		
 		<p>Sweet, so that's all there is to it. Have a fiddle if you'd like, we promise nothing will break. If something does! Then you can <a href="http://getsatisfaction.com/balupton/products/balupton_jquery_syntax_highlighter" title="Visit our Support Forum">reach us on our 24/7 support forum here</a> and we'll try to help you out the best we can.</p>
 		
@@ -281,9 +300,18 @@
 		<p>
 			This work is powered by coffee and distributed for free. Donations are how we afford our coffee. Coffee is how we stay awake after our day job hours to work on things like this free open-source project which you're looking at. So go ahead, and get that warm fuzzy feeling knowing you just helped some poor fellow working after hours for free to buy his coffee. You only need to spare a few dollars, or as much as you feel this piece of work is worth. Thanks so much. Alternatively; if you are not in a donating mood, then spreading the word about this project on twitter, your blog, or whatever is just as good. You can also give praise by clicking the feedback button or visiting our "Get Support" link. Thanks a bunch, we appreciate the help deeply.
 		</p>
-		<form action="https://www.paypal.com/cgi-bin/webscr" method="post"><p> 
-		    <input type="hidden" name="cmd" value="_s-xclick" /> <input type="image" src="https://www.paypal.com/en_US/i/btn/x-click-but21.gif" name="submit" alt="Make payments with PayPal - it's fast, free and secure!" /> <img alt="" src="https://www.paypal.com/en_AU/i/scr/pixel.gif" width="1" height="1" /> <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----" /> 
-		</p></form>
+		<form id="paypal-form" action="https://www.paypal.com/cgi-bin/webscr" method="post">
+			<input type="hidden" name="cmd" value="_donations">
+			<input type="hidden" name="business" value="APWCX9D4EJPXG">
+			<input type="hidden" name="lc" value="AU">
+			<input type="hidden" name="item_name" value="Donation to Benjamin Arthur Lupton">
+			<input type="hidden" name="currency_code" value="AUD">
+			<input type="hidden" name="bn" value="PP-DonationsBF:btn_donate_SM.gif:NonHostedGuest">
+			<p>
+				<img alt="" border="0" src="https://www.paypal.com/en_AU/i/scr/pixel.gif" width="1" height="1">
+				<input id="paypal-submit" type="image" src="https://www.paypal.com/en_AU/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online.">
+			</p>
+		</form>
 		<p> 
 			This work is licensed under a <a rel="license" href="http://www.gnu.org/licenses/agpl.html">GNU Affero General Public License</a>.
 		</p>
