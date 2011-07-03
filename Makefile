@@ -32,8 +32,8 @@ edithooks:
 
 
 refresh:
-	wget -q http://github.com/balupton/jquery-sparkle/raw/master/scripts/resources/core.console.js -O scripts/resources/core.console.js ;
-	wget -q http://github.com/balupton/jquery-sparkle/raw/master/scripts/resources/jquery.appendscriptstyle.js -O scripts/resources/jquery.appendscriptstyle.js ;
+	wget -q http://balupton.github.com/jquery-sparkle/scripts/resources/core.console.js -O scripts/resources/core.console.js ;
+	wget -q http://balupton.github.com/jquery-sparkle/scripts/resources/jquery.appendscriptstyle.js -O scripts/resources/jquery.appendscriptstyle.js ;
 	
 pack:
 	cat \
