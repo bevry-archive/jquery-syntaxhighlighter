@@ -8,9 +8,9 @@ BUILDDIR = ./.build
 CLOSUREURL = http://closure-compiler.googlecode.com/files/compiler-latest.zip
 CLOSUREDIR = $(BUILDDIR)/closure
 CLOSUREFILE = $(CLOSUREDIR)/compiler.jar
-YUIURL = http://yuilibrary.com/downloads/yuicompressor/yuicompressor-2.4.2.zip
+YUIURL = http://yui.zenfs.com/releases/yuicompressor/yuicompressor-2.4.7.zip
 YUIDIR = $(BUILDDIR)/yui
-YUIFILE = $(YUIDIR)/yuicompressor-2.4.2/build/yuicompressor-2.4.2.jar
+YUIFILE = $(YUIDIR)/yuicompressor-2.4.7/build/yuicompressor-2.4.7.jar
 
 
 all:
@@ -26,7 +26,7 @@ add:
 
 push:
 	git push --all ; git push --tags ;
-	
+
 edithooks:
 	mate .git/hooks/pre-commit
 
@@ -34,7 +34,7 @@ edithooks:
 refresh:
 	wget -q http://balupton.github.com/jquery-sparkle/scripts/resources/core.console.js -O scripts/resources/core.console.js ;
 	wget -q http://balupton.github.com/jquery-sparkle/scripts/resources/jquery.appendscriptstyle.js -O scripts/resources/jquery.appendscriptstyle.js ;
-	
+
 pack:
 	cat \
 		./scripts/resources/core.console.js \
@@ -51,17 +51,17 @@ compress:
 
 	java -jar $(CLOSUREFILE) --create_source_map ./prettify/closure.map --js_output_file=./prettify/prettify.min.js --js=./prettify/prettify.js;
 	java -jar $(YUIFILE) ./prettify/prettify.css -o ./prettify/prettify.min.css
-	
+
 build:
 	$(MAKE) pack;
 	$(MAKE) compress;
-	
+
 build-update:
 	$(MAKE) clean;
 	mkdir $(BUILDDIR) $(CLOSUREDIR) $(YUIDIR);
-	cd $(CLOSUREDIR); wget -q $(CLOSUREURL) -O file.zip; tar -xf file.zip;
-	cd $(YUIDIR); wget -q $(YUIURL) -O file.zip; tar -xf file.zip;
-	
+	cd $(CLOSUREDIR); wget $(CLOSUREURL) -O file.zip; tar -xf file.zip;
+	cd $(YUIDIR); wget $(YUIURL) -O file.zip; tar -xf file.zip;
+
 clean:
 	rm -Rf $(BUILDDIR);
-	
+
