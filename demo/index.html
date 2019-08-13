@@ -1,96 +1,210 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>
-        jQuery Syntax Highlighter - Based on Google's Prettify
-    </title>
-	
-	<!-- Include jQuery (Ajaxy Requirement) -->
-	<script type="text/javascript" src="../scripts/jquery-1.4.2.min.js"></script>
-	<!-- Include jQuery Syntax Highlighter (Production) -->
-	<!-- <script type="text/javascript" src="../scripts/jquery.syntaxhighlighter.min.js"></script> -->
-	<!-- Include jQuery Syntax Highlighter (Development) -->
-	<script type="text/javascript" src="../scripts/jquery.syntaxhighlighter.js"></script>
-	<!-- Initialise jQuery Syntax Highlighter -->
-	<script type="text/javascript">/*<![CDATA[*/
-		$.SyntaxHighlighter.init();
-	/*]]>*/</script>
-	
-	<!-- Include The Demo's Requirements -->
-	<link type="text/css" rel="stylesheet" media="screen" href="./styles/style.css" />
-</head>
-<body>
-	<!-- Include this demo's requirements -->
-	<!-- GetSatisfaction -->
-	<script type="text/javascript" src="http://s3.amazonaws.com/getsatisfaction.com/javascripts/feedback-v2.js"></script> 
-	<script type="text/javascript">/*<![CDATA[*/
-	var GSFN_feedback_widget = new GSFN.feedback_widget({ display: 'overlay', company: 'balupton', placement: 'right', color: '#222', style: 'question' });
-	/*]]>*/</script> 
-	
-	<div class="section links" id="links">
-		<h1>jQuery Syntax Highlighter - Based on Google's Prettify</h1>
-		<h2><a href="http://github.com/balupton/jquery-syntaxhighlighter/downloads" title="Download" id="download">Download</a></h2>
-		<h2><a href="http://www.balupton.com/projects/jquery-syntaxhighlighter" title="Home Page">Home Page</a></h2>
-		<h2><a href="http://github.com/balupton/jquery-syntaxhighlighter" title="Project Page">Project Page</a></h2>
-		<h2><a href="http://getsatisfaction.com/balupton/products/balupton_jquery_syntax_highlighter" title="Support Page" class="gsfnwidget">Get Support</a></h2>
-		<h2><a href="http://github.com/balupton/jquery-syntaxhighlighter/tree/master" title="Source Code">Source Code</a></h2>
-	</div>
-	
-	<div class="section about" id="about">
-		<h2>About</h2>
-		
-		<p>
-			<strong>jQuery Syntax Highlighter</strong> provides an elegant and simplistic interface for using <a href="http://code.google.com/p/google-code-prettify/" class="extern">Google's Prettify</a> with jQuery. We also add a series of features that aren't possible just using Prettify, to ensure that you get the best experience possible:
-		</p>
-		
-		<ul class="features">
-			<li><a href="#install" title="See the quick and easy installation instructions">Installation and usage</a> can be done in two lines!</li>
-			<li>Code can either be wrapped (default) or scrollable.</li>
-			<li>Styling is themeable. Comes with two custom themes (balupton and google).</li>
-			<li><a href="#using" title="See more information on using the Syntax Highlighter">Support for using the <code>code</code> and <code>pre</code> elements for SEO and semantic relevance!</a>
-				<em>Note! Currently Internet Explorer 6-8 have an <a href="http://stackoverflow.com/questions/1970446/prettify-highlightning-in-a-pre-with-white-spacenowrap-is-one-line-in-ie">issue</a> with rendering new lines on code elements, until a fix is found please use <code>pre</code> elements instead.</em>
-			</li>
-			<li id="supported"><a href="#using" title="See more information on using the Syntax Highlighter">Supports the following languages</a> out of the box: <em>bsh, c, cc, cpp, cs, csh, cyc, cv, htm, html, java, js, m, mxml, perl, pl, pm, py, rb, sh, xhtml, xml, xsl.</em></li>
-			<li><a href="#using" title="See more information on using the Syntax Highlighter">Lightweight auto-detection for which language you are using.</a> We can also manually sepecify the language for SEO and semantic relevance according to the <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/text-level-semantics.html#the-code-element" class="extern">WhatWG's recommendation</a> on code inclusion.</li>
-			<li><a href="#ajax" title="See more information about using the Syntax Highlighter with dynamic content">Ajax and Dynamic Content Safe.</a> Can be used on the fly with dynamic content safely.</li>
-			<li><a href="#options" title="See all the options/configuration we support">Only configurable</a> at the global level for maximum speed benefits.</li>
-		</ul>
-		
-		<p>So let's walk through it.</p>
-	</div>
-	
-	<div class="section install" id="install">
-		<h2>Installation via CDN (Content Delivery Network)</h2>
-		
-		<h3>Step 1. Include jQuery (insert into your page's head tag)</h3>
-		<p>If your page already has jQuery included then you can skip this step.</p>
-		<pre class="code language-html">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>
+			jQuery Syntax Highlighter - Based on Google's Prettify
+		</title>
+
+		<!-- Include jQuery (Ajaxy Requirement) -->
+		<script
+			type="text/javascript"
+			src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.4.2/jquery.min.js"
+		></script>
+		<!-- Include jQuery Syntax Highlighter (Production) -->
+		<!-- <script type="text/javascript" src="../scripts/jquery.syntaxhighlighter.min.js"></script> -->
+		<!-- Include jQuery Syntax Highlighter (Development) -->
+		<script
+			type="text/javascript"
+			src="../scripts/jquery.syntaxhighlighter.js"
+		></script>
+		<!-- Initialise jQuery Syntax Highlighter -->
+		<script type="text/javascript">
+			/*<![CDATA[*/
+			$.SyntaxHighlighter.init()
+			/*]]>*/
+		</script>
+
+		<!-- Include The Demo's Requirements -->
+		<link
+			type="text/css"
+			rel="stylesheet"
+			media="screen"
+			href="./styles/style.css"
+		/>
+	</head>
+	<body>
+		<div class="section links" id="links">
+			<h1>jQuery Syntax Highlighter - Based on Google's Prettify</h1>
+			<h2>
+				<a
+					href="https://github.com/bevry-archive/jquery-syntaxhighlighter/archive/master.zip"
+					title="Download"
+					>Download</a
+				>
+			</h2>
+			<h2>
+				<a
+					href="https://balupton.com/projects/jquery-syntaxhighlighter"
+					title="Home Page"
+					>Home Page</a
+				>
+			</h2>
+			<h2>
+				<a
+					href="https://bevry-archive.github.io/jquery-syntaxhighlighter/demo"
+					title="Demo Page"
+					>Demo Page</a
+				>
+			</h2>
+			<h2>
+				<a
+					href="http://github.com/bevry-archive/jquery-syntaxhighlighter/tree/master"
+					title="Source Code"
+					>Source Code</a
+				>
+			</h2>
+		</div>
+
+		<div class="section about" id="about">
+			<h2>About</h2>
+
+			<p>
+				<strong>jQuery Syntax Highlighter</strong> provides an elegant and
+				simplistic interface for using
+				<a href="http://code.google.com/p/google-code-prettify/" class="extern"
+					>Google's Prettify</a
+				>
+				with jQuery. We also add a series of features that aren't possible just
+				using Prettify, to ensure that you get the best experience possible:
+			</p>
+
+			<ul class="features">
+				<li>
+					<a
+						href="#install"
+						title="See the quick and easy installation instructions"
+						>Installation and usage</a
+					>
+					can be done in two lines!
+				</li>
+				<li>Code can either be wrapped (default) or scrollable.</li>
+				<li>
+					Styling is themeable. Comes with two custom themes (balupton and
+					google).
+				</li>
+				<li>
+					<a
+						href="#using"
+						title="See more information on using the Syntax Highlighter"
+						>Support for using the <code>code</code> and
+						<code>pre</code> elements for SEO and semantic relevance!</a
+					>
+					<em
+						>Note! Currently Internet Explorer 6-8 have an
+						<a href="https://stackoverflow.com/q/1970446/130638">issue</a>
+						with rendering new lines on code elements, until a fix is found
+						please use <code>pre</code> elements instead.</em
+					>
+				</li>
+				<li id="supported">
+					<a
+						href="#using"
+						title="See more information on using the Syntax Highlighter"
+						>Supports the following languages</a
+					>
+					out of the box:
+					<em
+						>bsh, c, cc, cpp, cs, csh, cyc, cv, htm, html, java, js, m, mxml,
+						perl, pl, pm, py, rb, sh, xhtml, xml, xsl.</em
+					>
+				</li>
+				<li>
+					<a
+						href="#using"
+						title="See more information on using the Syntax Highlighter"
+						>Lightweight auto-detection for which language you are using.</a
+					>
+					We can also manually sepecify the language for SEO and semantic
+					relevance according to the
+					<a
+						href="http://www.whatwg.org/specs/web-apps/current-work/multipage/text-level-semantics.html#the-code-element"
+						class="extern"
+						>WhatWG's recommendation</a
+					>
+					on code inclusion.
+				</li>
+				<li>
+					<a
+						href="#ajax"
+						title="See more information about using the Syntax Highlighter with dynamic content"
+						>Ajax and Dynamic Content Safe.</a
+					>
+					Can be used on the fly with dynamic content safely.
+				</li>
+				<li>
+					<a
+						href="#options"
+						title="See all the options/configuration we support"
+						>Only configurable</a
+					>
+					at the global level for maximum speed benefits.
+				</li>
+			</ul>
+
+			<p>So let's walk through it.</p>
+		</div>
+
+		<div class="section install" id="install">
+			<h2>Installation via CDN (Content Delivery Network)</h2>
+
+			<h3>Step 1. Include jQuery (insert into your page's head tag)</h3>
+			<p>
+				If your page already has jQuery included then you can skip this step.
+			</p>
+			<pre class="code language-html">
 			&lt;!-- Include jQuery (Syntax Highlighter Requirement) --&gt;
-			&lt;script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"&gt;&lt;/script&gt;
-		</pre>
-		
-		<h3>Step 2. Include jQuery Syntax Highlighter (insert into your page's head tag)</h3>
-		<pre class="code language-html">
+			&lt;script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.4.2/jquery.min.js"&gt;&lt;/script&gt;
+		</pre
+			>
+
+			<h3>
+				Step 2. Include jQuery Syntax Highlighter (insert into your page's head
+				tag)
+			</h3>
+			<pre class="code language-html">
 			&lt;!-- Include jQuery Syntax Highlighter --&gt;
-			&lt;script type="text/javascript" src="http://balupton.github.com/jquery-syntaxhighlighter/scripts/jquery.syntaxhighlighter.min.js"&gt;&lt;/script&gt;
-		</pre>
-		
-		<h3>Step 3. Initialise jQuery Syntax Highlighter (insert into your page's head tag)</h3>
-		<pre class="code language-html">
+			&lt;script type="text/javascript" src="https://bevry-archive.github.io/jquery-syntaxhighlighter/scripts/jquery.syntaxhighlighter.min.js"&gt;&lt;/script&gt;
+		</pre
+			>
+
+			<h3>
+				Step 3. Initialise jQuery Syntax Highlighter (insert into your page's
+				head tag)
+			</h3>
+			<pre class="code language-html">
 			&lt;!-- Initialise jQuery Syntax Highlighter --&gt;
 			&lt;script type="text/javascript"&gt;$.SyntaxHighlighter.init();&lt;/script&gt;
-		</pre>
-		
-		<p>And that's all there is to it in regards to installation. You don't actually have to download anything! now that is neat. Alternatively you could use a local copy of jQuery Syntax Highlighter instead of the CDN copy, but we'll leave that to you. So moving on, how do we let Syntax Highlighter know that we want to highlight our code block?</p>
-	</div>
-	
-	<div class="section using" id="using">
-		<h2>Usage</h2>
-		
-		<p>So you have you standard code block of let's say javascript code, which looks like this:</p>
-		<pre class="code language-html">
+		</pre
+			>
+
+			<p>
+				And that's all there is to it in regards to installation. You don't
+				actually have to download anything! now that is neat. Alternatively you
+				could use a local copy of jQuery Syntax Highlighter instead of the CDN
+				copy, but we'll leave that to you. So moving on, how do we let Syntax
+				Highlighter know that we want to highlight our code block?
+			</p>
+		</div>
+
+		<div class="section using" id="using">
+			<h2>Usage</h2>
+
+			<p>
+				So you have you standard code block of let's say javascript code, which
+				looks like this:
+			</p>
+			<pre class="code language-html">
 			The following code block is what I would like to syntax highlight:
 			&lt;pre&gt;
 				// Define our Function
@@ -105,13 +219,23 @@
 				// Fire our Function
 				checkMeaningOfLife(decimal,success);
 			&lt;/pre&gt;
-		</pre>
-		
-		<p>And we want to highlight it. We can do this two ways. One is letting the Syntax Highlighter auto-detect which language you are using, the other is a more SEO friendly approach where we explicitly specify which language we want to use.</p>
-		
-		<h3>Auto-detection of the language</h3>
-		<p>To highlight our code and auto-detect the language, we would simply add the classname <code>highlight</code> to our code block. This will look like so:</p>
-		<pre class="code language-html">
+		</pre
+			>
+
+			<p>
+				And we want to highlight it. We can do this two ways. One is letting the
+				Syntax Highlighter auto-detect which language you are using, the other
+				is a more SEO friendly approach where we explicitly specify which
+				language we want to use.
+			</p>
+
+			<h3>Auto-detection of the language</h3>
+			<p>
+				To highlight our code and auto-detect the language, we would simply add
+				the classname <code>highlight</code> to our code block. This will look
+				like so:
+			</p>
+			<pre class="code language-html">
 			The following code block is what I would like to syntax highlight:
 			&lt;pre class="highlight"&gt;
 				// Define our Function
@@ -126,11 +250,25 @@
 				// Fire our Function
 				checkMeaningOfLife(decimal,success);
 			&lt;/pre&gt;
-		</pre>
-		
-		<h3>Explicit specification of the language</h3>
-		<p>We can also highlight our code by specifying the language used explicitly. This is good in case we don't trust the auto-detection script or if we would like some <a href="http://www.whatwg.org/specs/web-apps/current-work/multipage/text-level-semantics.html#the-code-element" class="extern">SEO benefits</a> by being more semantic (explicit with our markup). To do this we would simply add the classname <code>language-javascript</code> to our code block, where the text <code>javascript</code> is the name of the language we are using. This will look like so:</p>
-		<pre class="code language-html">
+		</pre
+			>
+
+			<h3>Explicit specification of the language</h3>
+			<p>
+				We can also highlight our code by specifying the language used
+				explicitly. This is good in case we don't trust the auto-detection
+				script or if we would like some
+				<a
+					href="http://www.whatwg.org/specs/web-apps/current-work/multipage/text-level-semantics.html#the-code-element"
+					class="extern"
+					>SEO benefits</a
+				>
+				by being more semantic (explicit with our markup). To do this we would
+				simply add the classname <code>language-javascript</code> to our code
+				block, where the text <code>javascript</code> is the name of the
+				language we are using. This will look like so:
+			</p>
+			<pre class="code language-html">
 			The following code block is what I would like to syntax highlight:
 			&lt;pre class="language-javascript"&gt;
 				// Define our Function
@@ -145,201 +283,240 @@
 				// Fire our Function
 				checkMeaningOfLife(decimal,success);
 			&lt;/pre&gt;
-		</pre>
-		
-		<p>Sweet! That was too easy!. But there is one every important thing we have to take note of before we continue. And that is encoding our HTML within code blocks such that it is not actually interpreted by the browser as html! Eeee. So let's read about that.</p>
-		
-		<h3 id="encoding">Encoding HTML</h3>
-		<p>
-			An extremely important thing with using code blocks is making sure you are encoding your HTML properly within your code blocks.
-			This is because if you don't your web browser will think it has to run that code, despite it being in a <code>code</code> or <code>pre</code> element! Argh! That could really cause problems...
-			So what we want to do is whenever we want to include code blocks (regardless of whether or not we are wanting to syntax highlight them) we always must remember to encode the HTML entities appropriately!
-			So we do this by converting all the characters which are <code>&lt;</code> to <code>&amp;lt;</code> and all the <code>&gt;</code> to <code>&amp;gt;</code>.
-			So for instance let's look at the following code sample:
-		</p>
-		<pre class="code language-html">
+		</pre
+			>
+
+			<p>
+				Sweet! That was too easy!. But there is one every important thing we
+				have to take note of before we continue. And that is encoding our HTML
+				within code blocks such that it is not actually interpreted by the
+				browser as html! Eeee. So let's read about that.
+			</p>
+
+			<h3 id="encoding">Encoding HTML</h3>
+			<p>
+				An extremely important thing with using code blocks is making sure you
+				are encoding your HTML properly within your code blocks. This is because
+				if you don't your web browser will think it has to run that code,
+				despite it being in a <code>code</code> or <code>pre</code> element!
+				Argh! That could really cause problems... So what we want to do is
+				whenever we want to include code blocks (regardless of whether or not we
+				are wanting to syntax highlight them) we always must remember to encode
+				the HTML entities appropriately! So we do this by converting all the
+				characters which are <code>&lt;</code> to <code>&amp;lt;</code> and all
+				the <code>&gt;</code> to <code>&amp;gt;</code>. So for instance let's
+				look at the following code sample:
+			</p>
+			<pre class="code language-html">
 			&lt;pre class="language-html"&gt;
 				&lt;span&gt;
 					I'm a span element. I hope I've been escaped properly... as otherwise I will be :-( and the browser will be :-O
 				&lt;/span&gt;
 			&lt;/pre&gt;
-		</pre>
-		<p>Looks good, but this is how we actually code it in our HTML:</p>
-		<pre class="code language-html">
+		</pre
+			>
+			<p>Looks good, but this is how we actually code it in our HTML:</p>
+			<pre class="code language-html">
 			&lt;pre class="language-html"&gt;
 				&amp;lt;span&amp;gt;
 					I'm a span element. I hope I've been escaped properly... as otherwise I will be :-( and the browser will be :-O
 				&amp;lt;/span&amp;gt;
 			&lt;/pre&gt;
-		</pre>
-		<p>Hrmmm. Interesting... But once you've got that nailed, then there really are not worries and you're all good to go.
-			If you are a keen person, you may want also want check out the source code for this demo to gain a better grasp of this issue.</p>
-		
-		<p>
-			There is also one quite important thing. Internet Explorer 6-8 will struggle displaying newlines using <code>code</code> elements. This is a known issue and has been documented in various locations with no known fix
-			<sup>
-				<a href="http://stackoverflow.com/questions/1970446/prettify-highlightning-in-a-pre-with-white-spacenowrap-is-one-line-in-ie">1</a>
-				<a href="http://code.google.com/p/google-code-prettify/issues/detail?id=127">2</a>
-				<a href="http://www.quirksmode.org/bugreports/archives/2004/11/innerhtml_and_t.html">3</a>
-			</sup>
-			. In the meantime please use <code>pre</code> elements instead of <code>code</code> elements. You can achieve the same SEO semantic benefits by adding the classname <code>code</code> to your <code>pre</code> element like so:
-		</p>
-		<pre class="code language-html">
+		</pre
+			>
+			<p>
+				Hrmmm. Interesting... But once you've got that nailed, then there really
+				are not worries and you're all good to go. If you are a keen person, you
+				may want also want check out the source code for this demo to gain a
+				better grasp of this issue.
+			</p>
+
+			<p>
+				There is also one quite important thing. Internet Explorer 6-8 will
+				struggle displaying newlines using <code>code</code> elements. This is a
+				known issue and has been documented in various locations with no known
+				fix
+				<sup>
+					<a href="https://stackoverflow.com/q/1970446/130638">1</a>
+					<a
+						href="http://code.google.com/p/google-code-prettify/issues/detail?id=127"
+						>2</a
+					>
+					<a
+						href="http://www.quirksmode.org/bugreports/archives/2004/11/innerhtml_and_t.html"
+						>3</a
+					>
+				</sup>
+				. In the meantime please use <code>pre</code> elements instead of
+				<code>code</code> elements. You can achieve the same SEO semantic
+				benefits by adding the classname <code>code</code> to your
+				<code>pre</code> element like so:
+			</p>
+			<pre class="code language-html">
 			&lt;pre class="code language-html"&gt;
 				&amp;lt;span&amp;gt;
 					I'm a span element. I hope I've been escaped properly... as otherwise I will be :-( and the browser will be :-O
 				&amp;lt;/span&amp;gt;
 			&lt;/pre&gt;
-		</pre>
-		
-		<p>Great! So that is all there is too it and all you need to know to install and use the Syntax Highlighter. You can quit reading and start working on your project right now, or you could learn a little bit more.</p>
-	</div>
-	
-	<div class="section advanced" id="advanced">
-		<h3 id="ajax">Highlighting Dynamic/Ajax Content</h3>
-		<p>Syntax Highlighter is also ajax friendly. This means we can load in dynamic code blocks into our page which we would like highlighted, and actually highlight them without problem. Let's see how we can do this with the following snippet of javascript code:</p>
-		<pre class="code language-javascript">
+		</pre
+			>
+
+			<p>
+				Great! So that is all there is too it and all you need to know to
+				install and use the Syntax Highlighter. You can quit reading and start
+				working on your project right now, or you could learn a little bit more.
+			</p>
+		</div>
+
+		<div class="section advanced" id="advanced">
+			<h3 id="ajax">Highlighting Dynamic/Ajax Content</h3>
+			<p>
+				Syntax Highlighter is also ajax friendly. This means we can load in
+				dynamic code blocks into our page which we would like highlighted, and
+				actually highlight them without problem. Let's see how we can do this
+				with the following snippet of javascript code:
+			</p>
+			<pre class="code language-javascript">
 			var $content = $('&lt;div&gt;This is an upcoming code black:&lt;code class="language-javascript"&gt;// I am some code&lt;/code&gt;&lt;/div&gt;');
 			$content.syntaxHighlight(); // will highlight the code block found inside
-		</pre>
-		
-		<p>If you are using <a href="http://www.balupton.com/projects/jquery-sparkle" title="Visit jQuery Sparkle's Homepage" class="extern">jQuery Sparkle</a> (a Do-Not-Repeat-Yourself jQuery Framework aimed at simplifying your development with powerful tools) then calling <code>$content.sparkle()</code> will also call <code>$content.syntaxHighlight()</code> automatically for us.</p>
-	</div>
-	
-	<div class="section options" id="options">
-		<h2>Configurable Options</h2>
-		<p>jQuery Syntax Highlighter comes with a whole bunch of configurable options. Here they are:</p>
-		<pre class="code language-javascript">
+		</pre
+			>
+
+			<p>
+				If you are using
+				<a
+					href="https://balupton.com/projects/jquery-sparkle"
+					title="Visit jQuery Sparkle's Homepage"
+					class="extern"
+					>jQuery Sparkle</a
+				>
+				(a Do-Not-Repeat-Yourself jQuery Framework aimed at simplifying your
+				development with powerful tools) then calling
+				<code>$content.sparkle()</code> will also call
+				<code>$content.syntaxHighlight()</code> automatically for us.
+			</p>
+		</div>
+
+		<div class="section options" id="options">
+			<h2>Configurable Options</h2>
+			<p>
+				jQuery Syntax Highlighter comes with a whole bunch of configurable
+				options. Here they are:
+			</p>
+			<pre class="code language-javascript">
 			/**
 			 * Whether or not we should load in Google Prettify automatically if it was not detected.
 			 */
 			'load': true,
-			
+
 			/**
 			 * Whether or not we should highlight all appropriate code blocks automatically once the page has finished loading.
 			 */
 			'highlight': true,
-			
+
 			/**
 			 * Whether or not we should output debug information in case something is not working correctly.
 			 */
 			'debug': false,
-			
+
 			/**
 			 * Whether or not we should wrap the code blocks lines, or have them scrollable.
 			 */
 			'wrapLines': true,
-			
+
 			/**
 			 * Whether or not we should display line numbers next to the code blocks.
 			 */
 			'lineNumbers': true,
-			
+
 			/**
 			 * Whether or not we should strip empty start and finish lines from the code blocks.
 			 */
 			'stripEmptyStartFinishLines': true,
-			
+
 			/**
 			 * Whether or not we should remove whitespaces/indentations which are only there for HTML formatting of our code block.
 			 */
 			'stripInitialWhitespace': true,
-			
+
 			/**
 			 * Whether or not we should alternate the lines background colours on odd and even rows.
 			 */
 			'alternateLines': false,
-			
+
 			/**
 			 * The default class to look for in case we have not explicitly specified a language.
 			 */
 			'defaultCssClass': 'highlight',
-			
+
 			/**
 			 * The theme that should be used by our highlighted code blocks.
 			 */
 			'theme': 'balupton',
-			
+
 			/**
 			 * The themes to load in for use with our highlighted code blocks.
 			 */
 			'themes': ['balupton'],
-			
+
 			/**
 			 * The baseUrl to load Google's Prettify from.
 			 * This is used to load in Google's Prettify if the load option is true and it was not found.
 			 */
-			'prettifyBaseUrl': 'http://balupton.github.com/jquery-syntaxhighlighter/prettify',
-			
+			'prettifyBaseUrl': 'https://bevry-archive.github.io/jquery-syntaxhighlighter/prettify',
+
 			/**
 			 * The baseUrl to load our Syntax Highlighter from.
 			 * This is used to load in the stylesheet and additional themes.
 			 */
-			'baseUrl': 'http://balupton.github.com/balupton/jquery-syntaxhighlighter'
-		</pre>
-		
-		<p>To use one, all we need to do is add it to our <code>init</code> call way back in our <code>head</code> tag when we initialise the jQuery Syntax Highlighter. So let's see how we would do this to disable line wrapping:</p>
-		<pre class="code language-html">
+			'baseUrl': 'https://bevry-archive.github.io/balupton/jquery-syntaxhighlighter'
+		</pre
+			>
+
+			<p>
+				To use one, all we need to do is add it to our <code>init</code> call
+				way back in our <code>head</code> tag when we initialise the jQuery
+				Syntax Highlighter. So let's see how we would do this to disable line
+				wrapping:
+			</p>
+			<pre class="code language-html">
 			&lt;!-- Initialise jQuery Syntax Highlighter --&gt;
 			&lt;script type="text/javascript"&gt;
 				$.SyntaxHighlighter.init({
 					'wrapLines':false
 				});
 			&lt;/script&gt;
-		</pre>
-		
-		<p>Sweet, so that's all there is to it. Have a fiddle if you'd like, we promise nothing will break. If something does! Then you can <a href="http://getsatisfaction.com/balupton/products/balupton_jquery_syntax_highlighter" title="Visit our Support Forum">reach us on our 24/7 support forum here</a> and we'll try to help you out the best we can.</p>
-		
-	</div>
-	
-	<div class="section">
-		<h2>Enjoy!!!</h2>
-		<p>
-			If anything isn't working the way you want it to, or if you would like to request a feature or provide praise or general feedback then be sure to click the feedback button to the right, or the "Get Support" link up the top of this page.
-		</p>
-		<p>
-			This work is powered by coffee and distributed for free. Donations are how we afford our coffee. Coffee is how we stay awake after our day job hours to work on things like this free open-source project which you're looking at. So go ahead, and get that warm fuzzy feeling knowing you just helped some poor fellow working after hours for free to buy his coffee. You only need to spare a few dollars, or as much as you feel this piece of work is worth. Thanks so much. Alternatively; if you are not in a donating mood, then spreading the word about this project on twitter, your blog, or whatever is just as good. You can also give praise by clicking the feedback button or visiting our "Get Support" link. Thanks a bunch, we appreciate the help deeply.
-		</p>
-		<form id="paypal-form" action="https://www.paypal.com/cgi-bin/webscr" method="post">
-			<input type="hidden" name="cmd" value="_donations">
-			<input type="hidden" name="business" value="APWCX9D4EJPXG">
-			<input type="hidden" name="lc" value="AU">
-			<input type="hidden" name="item_name" value="Donation to Benjamin Arthur Lupton">
-			<input type="hidden" name="currency_code" value="AUD">
-			<input type="hidden" name="bn" value="PP-DonationsBF:btn_donate_SM.gif:NonHostedGuest">
+		</pre
+			>
+		</div>
+
+		<div class="section">
+			<h2>Enjoy!!!</h2>
 			<p>
-				<img alt="" border="0" src="https://www.paypal.com/en_AU/i/scr/pixel.gif" width="1" height="1">
-				<input id="paypal-submit" type="image" src="https://www.paypal.com/en_AU/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online.">
+				This work is powered by coffee and distributed for free.
+				<a href="https://balupton.com/donate">Donations</a> are how we afford
+				our coffee. Coffee is how we stay awake after our day job hours to work
+				on things like this free open-source project which you're looking at. So
+				go ahead, and get that warm fuzzy feeling knowing you just helped some
+				poor fellow working after hours for free to buy his coffee. You only
+				need to spare a few dollars, or as much as you feel this piece of work
+				is worth. Thanks so much. Alternatively; if you are not in a donating
+				mood, then spreading the word about this project on twitter, your blog,
+				or whatever is just as good. Thanks a bunch, we appreciate the help
+				deeply.
 			</p>
-		</form>
-		<p> 
-			This work is licensed under a <a rel="license" href="http://www.gnu.org/licenses/agpl.html">GNU Affero General Public License</a>.
-		</p>
-		<br />
-	</div>
-	
-	<!-- Google Analytics --> 
-	<script type="text/javascript"> 
-		//<![CDATA[
-		var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-		document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-		//]]>
-	</script> 
-	<script type="text/javascript" src="./scripts/modernizr-1.5.min.js"></script> 
-	<script type="text/javascript"> 
-		//<![CDATA[
-		try {
-			var pageTracker = _gat._getTracker("UA-4446117-1");
-			pageTracker._initData();
-			pageTracker._setCustomVar(1, "html5.boxshadow", Modernizr.boxshadow ? "yes" : "no" , 2 );
-			pageTracker._setCustomVar(2, "html5.multiplebgs", Modernizr.multiplebgs ? "yes" : "no", 2 );
-			pageTracker._setCustomVar(3, "html5.fontface", Modernizr.fontface ? "yes" : "no", 2 );
-			pageTracker._setCustomVar(4, "html5.csstransitions", Modernizr.csstransitions ? "yes" : "no", 2 );
-			pageTracker._setCustomVar(5, "html5.borderradius", Modernizr.borderradius ? "yes" : "no", 2 );
-			pageTracker._trackPageview();
-		} catch(err) {}
-		//]]>
-	</script>
-	
-</body>
+			<p>
+				This work is licensed under a
+				<a rel="license" href="https://spdx.org/licenses/MIT.html"
+					>MIT License</a
+				>.
+			</p>
+			<br />
+		</div>
+
+		<script
+			type="text/javascript"
+			src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/1.5/modernizr.min.js"
+		></script>
+	</body>
 </html>

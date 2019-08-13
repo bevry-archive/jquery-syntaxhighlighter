@@ -1,0 +1,39 @@
+{
+	"name": "jquery-syntaxhighlighter",
+	"version": "1.1.0-beta",
+	"description": "jQuery extension for Google's Prettify Syntax Highlighter",
+	"main": "scripts/jquery.syntaxhighlighter.js",
+	"scripts": {
+		"build": "npm run build:refresh && npm run build:minify",
+		"build:refresh": "npm run build:refresh:console && npm run build:refresh:append && npm run build:refresh:generic",
+		"build:refresh:console": "wget -q https://bevry-archive.github.io/jquery-sparkle/scripts/resources/core.console.js -O scripts/resources/core.console.js",
+		"build:refresh:append": "wget -q https://bevry-archive.github.io/jquery-sparkle/scripts/resources/jquery.appendscriptstyle.js -O scripts/resources/jquery.appendscriptstyle.js",
+		"build:refresh:generic": "wget -q https://bevry-archive.github.io/jquery-history/demo/styles/generic.css -O ./demo/styles/generic.css",
+		"build:minify": "npm run build:minify:js && npm run build:minify:css && npm run build:minify:balupton && npm run build:minify:google && npm run build:minify:ie && npm run build:minify:prettifyjs && npm run build:minify:prettifycss",
+		"build:minify:js": "minify ./scripts/jquery.syntaxhighlighter.js > ./scripts/jquery.syntaxhighlighter.min.js",
+		"build:minify:css": "minify ./styles/style.css > ./styles/style.min.css",
+		"build:minify:balupton": "minify ./styles/theme-balupton.css > ./styles/theme-balupton.min.css",
+		"build:minify:google": "minify ./styles/theme-google.css > ./styles/theme-google.min.css",
+		"build:minify:ie": "minify ./styles/ie.css > ./styles/ie.min.css",
+		"build:minify:prettifyjs": "minify ./prettify/prettify.js > ./prettify/prettify.min.js",
+		"build:minify:prettifycss": "minify ./prettify/prettify.css > ./prettify/prettify.min.css",
+		"test": "echo 'no tests'"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/bevry-archive/jquery-syntaxhighlighter.git"
+	},
+	"keywords": [
+		"jquery",
+		"lightbox"
+	],
+	"author": "2010+ Benjamin Lupton <b@lupton.cc> (https://balupton.com)",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/bevry-archive/jquery-syntaxhighlighter/issues"
+	},
+	"homepage": "https://github.com/bevry-archive/jquery-syntaxhighlighter#readme",
+	"devDependencies": {
+		"minify": "^4.1.3"
+	}
+}

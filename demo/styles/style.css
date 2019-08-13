@@ -1,35 +1,35 @@
 /* Imports*/
-@import url("./yui-reset-3.1.1-min.css");
-@import url("./generic.css");
+@import url('https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css');
+@import url('./generic.css');
 
 #demo {
 	margin: 1em 0;
 	padding: 0;
-	border: 5px solid #DDD;
+	border: 5px solid #ddd;
 	font-size: 14px;
 }
 #menu {
-	margin:0;
-	padding:0;
-	background:#DDD;
-	border-bottom: 5px solid #DDD;
+	margin: 0;
+	padding: 0;
+	background: #ddd;
+	border-bottom: 5px solid #ddd;
 }
 #menu li {
-	margin:0;
-	padding:0;
-	background:white;
-	padding:0 1em;
+	margin: 0;
+	padding: 0;
+	background: white;
+	padding: 0 1em;
 }
 #menu .active {
-	background:yellow;
-	font-weight:bold;
+	background: yellow;
+	font-weight: bold;
 }
 #content {
-	padding:1em;
+	padding: 1em;
 }
 #current {
-	margin:0;
-	padding:0;
-	padding-left:1em;
-	border-top: 5px solid #DDD;
+	margin: 0;
+	padding: 0;
+	padding-left: 1em;
+	border-top: 5px solid #ddd;
 }
